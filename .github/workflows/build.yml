@@ -1,1 +1,55 @@
+name: build-installer
 
+on:
+  push:
+    tags:
+      
+'v*'
+workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  win:
+    runs-on: windows-latest
+    steps:
+      
+uses: actions/checkout@v4
+
+      
+uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+      
+uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 21
+
+      
+uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.12'
+
+      
+name: Build mod
+      continue-on-error: true
+      working-directory: mod
+      shell: bash
+      run: |
+        gradle build
+        cp build/libs/limevisuals-0.1.0.jar ../launcher/bundled/limevisuals.jar
+
+      
+name: Install deps
+      working-directory: launcher
+      run: npm install
+
+      
+name: Build and publish release
+      working-directory: launcher
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npx electron-builder --win --publish always
