@@ -9,7 +9,7 @@ const { autoUpdater } = require('electron-updater');
 const ROOT = app.getPath('userData');
 const GAME = path.join(ROOT, 'game'), RUNTIME = path.join(ROOT, 'runtime'), LOGS = path.join(ROOT, 'logs');
 const CFG = path.join(ROOT, 'lime-config.json');
-const UA = { 'User-Agent': 'LimeVisuals/' + app.getVersion() + ' (github.com/YOUR_GITHUB_NAME/limevisuals)' };
+const UA = { 'User-Agent': 'LimeVisuals/' + app.getVersion() + ' (krossherna-creator/limevisuals)' };
 let win, msToken = null;
 
 const j = async u => { const r = await fetch(u, { headers: UA }); if (!r.ok) throw new Error(r.status + ' ' + u); return r.json(); };
