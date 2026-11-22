@@ -25,6 +25,6 @@
       "shortcutName": "LimeVisuals",
       "uninstallDisplayName": "LimeVisuals"
     },
-    "publish": [{ "provider": "github", "owner": "krossherna-creator", "repo": "limevisuals" }]
+    "publish": [{ "provider": "github", "krossherna-creator": "krossherna-creator", "limevisual": "limevisuals" }]
   }
 }
