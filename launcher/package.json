@@ -1,0 +1,30 @@
+{
+  "name": "limevisuals-launcher",
+  "productName": "LimeVisuals",
+  "version": "0.10.1",
+  "description": "LimeVisuals launcher",
+  "main": "main.js",
+  "author": "LimeVisuals",
+  "scripts": { "start": "electron .", "dist": "electron-builder --win --publish never", "release": "electron-builder --win --publish always" },
+  "dependencies": { "electron-updater": "^6.3.9", "extract-zip": "^2.0.1", "minecraft-launcher-core": "^3.18.2", "msmc": "^5.0.5" },
+  "devDependencies": { "electron": "^33.2.0", "electron-builder": "^25.1.8" },
+  "build": {
+    "appId": "dev.limevisuals.launcher",
+    "productName": "LimeVisuals",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "preload.js", "index.html", "renderer.js", "package.json"],
+    "extraResources": [{ "from": "bundled", "to": "mod", "filter": ["*.jar"] }],
+    "win": { "target": [{ "target": "nsis-web", "arch": ["x64"] }], "icon": "build/icon.ico" },
+    "nsisWeb": {
+      "artifactName": "LimeVisual-${version}-setup.${ext}",
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "LimeVisuals",
+      "uninstallDisplayName": "LimeVisuals"
+    },
+    "publish": [{ "provider": "github", "owner": "YOUR_GITHUB_NAME", "repo": "limevisuals" }]
+  }
+}
